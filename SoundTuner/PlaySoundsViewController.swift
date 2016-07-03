@@ -42,11 +42,11 @@ class PlaySoundsViewController: UIViewController {
         case .Chipmunk:
             playSound(pitch: 1000)
         case .Echo:
+            playSound(echo: true)
+        case .Vader:
             playSound(pitch: -1000)
         case .Reverb:
             playSound(reverb: true)
-        case .Vader:
-            playSound(echo: true)
         }
         configureUI(PlayingState.Playing)
     }

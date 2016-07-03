@@ -94,6 +94,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             }
             
             self.fullLengthOfAudio = delayInSeconds
+            print(self.fullLengthOfAudio)
             // schedule a stop timer for when audio finishes playing
             self.stopTimerWhenFinishedPlaying(delayInSeconds)
         }
@@ -146,10 +147,12 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
     // Mark: Pause Audio
     
     func pauseAudio() {
-        stopTimer.invalidate()
-        configureUI(.Pause)
-        audioEngine.pause()
-        audioPlayerNode.pause()
+        if let stopTimer = stopTimer {
+            stopTimer.invalidate()
+            configureUI(.Pause)
+            audioEngine.pause()
+            audioPlayerNode.pause()
+        }
         
     }
 
