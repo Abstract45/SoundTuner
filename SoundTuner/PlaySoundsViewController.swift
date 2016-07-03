@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
-
+    
     @IBOutlet weak var fastButton: UIButton!
     @IBOutlet weak var slowButton: UIButton!
     @IBOutlet weak var chipMunkButton: UIButton!
@@ -26,14 +26,15 @@ class PlaySoundsViewController: UIViewController {
     var audioEngine: AVAudioEngine!
     var stopTimer: NSTimer!
     var audioFile: AVAudioFile!
-    var fullLengthOfAudio: Double?
+    
+   
     
     enum ButtonType: Int { case Slow = 0, Fast, Chipmunk, Echo, Vader, Reverb }
     
     
     @IBAction func playAudio(sender:UIButton) {
         print("Playing audio")
-        
+   
         switch ButtonType.init(rawValue: sender.tag)! {
         case .Slow:
             playSound(rate: 0.5)
@@ -49,6 +50,8 @@ class PlaySoundsViewController: UIViewController {
             playSound(reverb: true)
         }
         configureUI(PlayingState.Playing)
+        
+       
     }
     
     @IBAction func stopPlayingAudio(sender:UIButton) {
@@ -74,8 +77,14 @@ class PlaySoundsViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         configureUI(PlayingState.NotPlaying)
+        
+        if audioPlayerNode != nil {
+            if !audioPlayerNode.playing {
+                print("Not playing currentyl")
+            }
+        }
     }
     
-
-
+    
+    
 }
